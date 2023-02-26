@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.4.5</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.cos</groupId>
+	<artifactId>photogram-start</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>photogram-start</name>
+	<description>Demo project for Spring Boot</description>
+	<properties>
+		<java.version>11</java.version>
+	</properties>
+	<dependencies>
+
+		<!-- aop 라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+		<dependency>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+		</dependency>
+
+		<!-- qlrm -->
+		<dependency>
+			<groupId>org.qlrm</groupId>
+			<artifactId>qlrm</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+
+		<!-- 시큐리티 태그 라이브러리 -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+		</dependency>
+
+		<!-- JSP 템플릿 엔진 -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jasper</artifactId>
+			<version>9.0.43</version>
+		</dependency>
+
+		<!-- JSTL -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-client</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2 -->
+		<dependency>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
+			<version>2.3.6.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.boot</groupId> -->
+		<!-- <artifactId>spring-boot-starter-tomcat</artifactId> -->
+		<!-- <scope>provided</scope> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>io.awspring.cloud</groupId> -->
+		<!-- <artifactId>spring-cloud-starter-aws-parameter-store-config</artifactId> -->
+		<!-- <version>2.4.4</version> -->
+		<!-- </dependency> -->
+
+		<dependency>
+			<groupId>com.coveo</groupId>
+			<artifactId>spring-boot-parameter-store-integration</artifactId>
+			<version>1.5.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
+		</dependency>
+
+		<!-- s3 의존성 추가 -->
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-aws -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-aws</artifactId>
+			<version>2.2.1.RELEASE</version>
+			<type>pom</type>
+		</dependency>
+
+
+
+		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3 -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-s3</artifactId>
+			<version>1.12.408</version>
+		</dependency>
+
+
+
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.boot</groupId> -->
+		<!-- <artifactId>spring-boot-configuration-processor</artifactId> -->
+		<!-- <optional>true</optional> -->
+		<!-- </dependency> -->
+	</dependencies>
+	<!-- <dependencyManagement> -->
+	<!-- <dependencies> -->
+	<!-- <dependency> -->
+	<!-- <groupId>io.awspring.cloud</groupId> -->
+	<!-- <artifactId>spring-cloud-aws-dependencies</artifactId> -->
+	<!-- <version>2.4.4</version> -->
+	<!-- <type>pom</type> -->
+	<!-- <scope>import</scope> -->
+	<!-- </dependency> -->
+	<!-- </dependencies> -->
+	<!-- </dependencyManagement> -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<!-- <plugin> -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-resources-plugin</artifactId> -->
+			<!-- <configuration> -->
+			<!-- <archive> -->
+			<!-- <manifestEntries> -->
+			<!-- <Build-Jdk-Spec>${java.version}</Build-Jdk-Spec> -->
+			<!-- </manifestEntries> -->
+			<!-- </archive> -->
+			<!-- <delimiters> -->
+			<!-- <delimiter>${}</delimiter> -->
+			<!-- </delimiters> -->
+			<!-- <useDefaultDelimiters>false</useDefaultDelimiters> -->
+			<!-- <nonFilteredFileExtensions> -->
+			<!-- <nonFilteredFileExtension>png</nonFilteredFileExtension> -->
+			<!-- <nonFilteredFileExtension>jpg</nonFilteredFileExtension> -->
+			<!-- <nonFilteredFileExtension>jpeg</nonFilteredFileExtension> -->
+			<!-- <nonFilteredFileExtension>gif</nonFilteredFileExtension> -->
+			<!-- <nonFilteredFileExtension>java</nonFilteredFileExtension> -->
+			<!-- <nonFilteredFileExtension>css</nonFilteredFileExtension> -->
+			<!-- <nonFilteredFileExtension>js</nonFilteredFileExtension> -->
+			<!-- </nonFilteredFileExtensions> -->
+			<!-- <resources> -->
+			<!-- <resource> -->
+			<!-- <directory>src/main/resources</directory> -->
+			<!-- <filtering>true</filtering> -->
+			<!-- <includes> -->
+			<!-- <include>application.yml</include> -->
+			<!-- </includes> -->
+			<!-- </resource> -->
+			<!-- <resource> -->
+			<!-- <directory>src/main/resources/static</directory> -->
+			<!-- <filtering>false</filtering> -->
+			<!-- </resource> -->
+			<!-- <resource> -->
+			<!-- <directory>src/main/webapp</directory> -->
+			<!-- <filtering>false</filtering> -->
+			<!-- </resource> -->
+			<!-- </resources> -->
+			<!-- </configuration> -->
+			<!-- </plugin> -->
+		</plugins>
+	</build>
+
+</project>

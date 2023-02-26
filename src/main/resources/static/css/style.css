@@ -1,0 +1,182 @@
+/*紐⑤뱺�슂�냼�쓽 湲곕낯 留덉쭊 �뙣�뵫, �궗�씠吏� 珥덇린�솕*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  outline: none;
+}
+
+/*�럹�씠吏��쓽 以묒븰�쓣 �옟�븘以� 而⑦뀒�씠�꼫*/
+.container {
+  width: 100%;
+  min-height: 100%;
+}
+
+/*硫붿씤�깭洹� 湲곕낯�젙�쓽*/
+.loginMain {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(var(--b3f, 250, 250, 250), 1);
+}
+
+/*紐⑤뱺 踰꾪듉�� �룷�씤�꽣*/
+button {
+  cursor: pointer;
+}
+
+/*濡쒓렇�씤 �꽮�뀡*/
+.login {
+  width: 100%;
+  max-width: 935px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*濡쒓렇�씤�뤌怨� 媛��엯�븯湲곕�� 媛먯떥�뒗 而⑦뀒�씠�꼫*/
+.login__form__container {
+  width: 350px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/*濡쒓렇�씤�뤌, 媛��엯�븯湲� 諛뺤뒪 �뵒�옄�씤*/
+.login__form,
+.login__register {
+  padding: 10px 0 20px;
+  text-align: center;
+  border: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
+  background-color: #fff;
+}
+
+/*濡쒓퀬�씠誘몄�瑜� �떞�쓣 釉붾줉�슂�냼*/
+.login__form h1 {
+  height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*濡쒓퀬 �씠誘몄�*/
+.login__form h1 img {
+  width: 175px;
+}
+
+/*濡쒓렇�씤 �씤�뭼諛뺤뒪*/
+.login__input , .login__oauth{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 24px;
+  padding: 0 40px;
+}
+
+/*濡쒓렇�씤 �씤�뭼�깭洹�*/
+.login__input input {
+  width: 100%;
+  height: 38px;
+  padding: 9px 0 7px 8px;
+  border: 1px solid rgba(var(--ca6, 219, 219, 219), 1);
+  border-radius: 3px;
+  margin-bottom: 6px;
+}
+
+/*濡쒓렇�씤 踰꾪듉*/
+.login__input button {
+  border: 0;
+  outline: 0;
+  width: 100%;
+  height: 30px;
+  background-color: #0095f6;
+  color: #fff;
+  margin-top: 15px;
+  font-weight: 700;
+  border-radius: 3px;
+  transition: background 0.5s;
+}
+
+/*踰꾪듉 hover �븸�뀡*/
+.login__input button:hover {
+  background: #0f75b9;
+}
+
+/* login__horizon 遺숈�嫄� 洹몃깷 hr�쓣 �뵒�옄�씤�븳嫄�. */
+.login__horizon {
+  display: flex;
+  margin-top: 20px;
+  padding: 0 40px;
+  align-items: center;
+}
+
+.login__horizon .br {
+  width: 40%;
+  height: 1px;
+  border-top: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
+}
+
+.login__horizon .or {
+  width: 20%;
+  text-align: center;
+  color: #aaa;
+  font-size: 14px;
+}
+
+/* �럹�씠�뒪遺곷줈洹몄씤 �쁺�뿭 */
+.login__facebook {
+  padding: 0 40px;
+  margin-top: 15px;
+}
+/*�럹�씠�뒪遺� 濡쒓렇�씤 踰꾪듉*/
+.login__facebook button {
+  background-color: #fff;
+  width: 100%;
+  height: 30px;
+  border: 0;
+  font-weight: 600;
+  font-size: 15px;
+}
+/*�럹�씠�뒪遺� 濡쒓렇�씤 �깋源�*/
+.login__facebook button i,
+span {
+  color: #385185;
+}
+
+/*媛��엯�럹�씠吏�濡� �씠�룞*/
+.login__register {
+  margin-top: 10px;
+  line-height: 60px;
+  padding: 0;
+}
+
+/*怨꾩젙�씠 �뾾�쑝�떊媛��슂?*/
+.login__register span {
+  font-size: 14px;
+  font-weight: 200;
+}
+
+/*媛��엯�럹�씠吏� �씠�룞踰꾪듉*/
+.login__register a {
+  color: #0095f6;
+}
+
+/* 踰꾪듉�뵒�옄�씤 */
+.cta {
+  margin-right: 10px;
+  padding: 5px 9px;
+  border: 1px solid rgba(var(--ca6, 219, 219, 219), 1);
+  border-radius: 4px;
+  color: #262626;
+  font-weight: bold;
+  background: transparent;
+}
+
+/*踰꾪듉 釉붾（*/
+.cta.blue {
+  background: #0095f6 !important;
+  color: #fff !important;
+}

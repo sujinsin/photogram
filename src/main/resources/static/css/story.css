@@ -1,0 +1,290 @@
+@import "header.css";
+
+/*硫붿씤*/
+.main {
+	padding-top: 54px;
+}
+
+/*而⑦뀒�씠�꼫*/
+.main .container {
+	padding-top: 30px;
+	width: 935px;
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+}
+
+.heart_size {
+	position: fixed !important;
+	font-size: 500px !important;
+	color: red !important;
+	z-index: 998;
+	left: 0;
+	right: 0;
+	top: 20%;
+	bottom: 0;
+	text-align: center;
+	animation: fadeOut 0.7s forwards, scale1 0.7s;
+}
+
+@keyframes fadeOut {from { opacity:1;
+	
+}
+
+to {
+	opacity: 0;
+}
+
+}
+@keyframes scale1 { 0% {
+	transform: scale(0);
+}
+
+100%
+{
+transform
+:
+ 
+scale
+(1);
+}
+}
+}
+
+/*寃뚯떆臾쇰━�뒪�듃*/
+.main .container .story-list {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+/*寃뚯떆臾� 由ъ뒪�듃 �븘�씠�뀥*/
+.main .container .story-list .story-list__item {
+	margin-bottom: 30px;
+	border: 1px solid #dbdbdb;
+	box-shadow:1px 1px 10px #b4b4b4;
+	border-radius: 4px;
+}
+
+.story-list__item {
+	position: relative;
+}
+/*由ъ뒪�듃 �븘�씠�뀥 �뿤�뜑遺�遺�*/
+.main .container .story-list .story-list__item .sl__item__header {
+	width: 100%;
+	height: 60px;
+	display: flex;
+	align-items: center;
+}
+
+/*由ъ뒪�듃 �븘�씠�뀥 �뿤�뜑 div*/
+.main .container .story-list .story-list__item .sl__item__header div {
+	margin-left: 10px;
+	cursur:Pointer;
+}
+.main .container .story-list .story-list__item .sl__item__header div  a{
+	color: black;
+	font-weight:bold;
+		cursur:Pointer;
+}
+.user_image_class {
+		z-index: 997;
+	position:fixed;
+	width:100%;
+	height:100%;
+	left:0;
+	top:0;
+   background-color:rgba(0,0,0,0.5);
+}
+
+.user_image_size {
+	position:fixed;
+	width: 70%;
+	height: 50%;
+	z-index: 999;
+   margin: auto auto;
+   left: 0;
+   right: 0;
+   top:0;
+   bottom:0;
+}
+
+/*由ъ뒪�듃 �븘�씠�뀥 �뿤�뜑 �씠誘몄��쁺�뿭 諛뺤뒪*/
+.main
+  .container
+  .story-list
+  .story-list__item
+  .sl__item__header
+  div:nth-child(1) {
+	width: 40px;
+	height: 40px;
+	padding: 3px;
+	border-radius: 50%;
+	position: relative;
+}
+
+/*由ъ뒪�듃 �븘�씠�뀥 �뿤�뜑 �떎�젣�씠誘몄�*/
+.main
+  .container
+  .story-list
+  .story-list__item
+  .sl__item__header
+  div:nth-child(1)
+  img {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+
+/* 寃뚯떆臾� �씠誘몄� 諛뺤뒪*/
+.main .container .story-list .story-list__item .sl__item__img {
+	height: 600px;
+	min-height: 300px;
+}
+
+/* 寃뚯떆臾� �씠誘몄�*/
+.main .container .story-list .story-list__item .sl__item__img img {
+	width: 100%;
+	height: 100%;
+}
+
+/* 寃뚯떆臾� �씠誘몄� 諛묒뿉 �쁺�뿭�뱾 */
+.main .container .story-list .story-list__item .sl__item__contents {
+	display: flex;
+	flex-direction: column;
+}
+
+/*醫뗭븘�슂 踰꾪듉�쁺�뿭*/
+.main
+  .container
+  .story-list
+  .story-list__item
+  .sl__item__contents
+  .sl__item__contents__icon {
+	height: 40px;
+	padding: 5px 0;
+}
+
+/*醫뗭븘�슂 �떎�젣 踰꾪듉*/
+.main
+  .container
+  .story-list
+  .story-list__item
+  .sl__item__contents
+  .sl__item__contents__icon
+  button {
+	background-color: transparent;
+	width: 40px;
+	font-size: 25px;
+	border: 0;
+	cursor: pointer;
+}
+
+/*寃뚯떆臾� �궡�슜*/
+.main
+  .container
+  .story-list
+  .story-list__item
+  .sl__item__contents
+  .sl__item__contents__content {
+	padding: 5px 15px;
+}
+
+/*寃뚯떆臾� like 媛��닔�뒪���씪*/
+.main
+  .container
+  .story-list
+  .story-list__item
+  .sl__item__contents .like {
+	background-color: transparent;
+	border: 0;
+	color: #aaa;
+	font-size: 14px;
+	margin-bottom: 5px;
+	text-indent: 15px;
+}
+/*寃뚯떆臾� 醫뗭븘�슂 count媛� */
+.main
+  .container
+  .story-list
+  .story-list__item
+.sl__item__contents .like b {
+	margin-right: 5px;
+}
+
+/*�깭洹몄쁺�뿭*/
+.sl__item__contents__tags {
+	height: 40px;
+	padding: 5px 10px;
+	color: #0080ff;
+}
+
+/*肄붾찘�듃 = �뙎湲� */
+.main
+  .container
+  .story-list
+  .story-list__item
+  .sl__item__contents
+  .sl__item__contents__comment {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	background-color: transparent;
+	color: #000;
+	font-size: 16px;
+	padding: 0 15px;
+	margin-bottom: 5px;
+}
+
+/*�뙎湲� �궘�젣踰꾪듉*/
+.main
+  .container
+  .story-list
+  .story-list__item
+  .sl__item__contents
+.sl__item__contents__comment button {
+	border: none;
+	outline: none;
+	background: #fff;
+	cursor: pointer;
+}
+
+/* �뙎湲� �엯�젰李�*/
+.main .container .story-list .story-list__item .sl__item__input {
+	display: flex;
+	border-top: 1px solid #dbdbdb;
+}
+
+/*�엯�젰 �씤�뭼*/
+.main .container .story-list .story-list__item .sl__item__input input {
+	flex: 9;
+	height: 56px;
+	border: 0;
+	padding-left: 15px;
+}
+/* �엯�젰�븯湲� 踰꾪듉 */
+.main .container .story-list .story-list__item .sl__item__input button {
+	flex: 1;
+	height: 56px;
+	border: 0;
+	background-color: transparent;
+	font-weight: 500;
+	color: #0095f6;
+	font-size: 14px;
+}
+
+/* Event */
+.main
+  .container
+  .story-list
+  .story-list__item
+  .sl__item__contents
+  .sl__item__contents__icon
+  button:first-child
+  .active {
+	color: red;
+}
+
+.profile-image {
+	border: 2px solid #8a3ab8;
+}

@@ -1,0 +1,41 @@
+name: photogram server CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ${{ ubuntu.version }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        path: ${{ with.path }}
+
+    - name: application-prod yml copy
+      run: ${{ prod.yml.copy }}
+
+    - name: credentials parameter store
+      run: |
+        var=$(curl http://169.254.169.254/latest/meta-data/iam/security-credentials/) 
+        access_key_id=$(curl http://169.254.169.254/latest/meta-data/iam/security-credentials/$var | jq -r '.AccessKeyId')
+        secret_access_key=$(curl http://169.254.169.254/latest/meta-data/iam/security-credentials/$var | jq -r '.SecretAccessKey')
+        token=$(curl http://169.254.169.254/latest/meta-data/iam/security-credentials/$var | jq -r '.Token')
+
+    - name: Update AWS credentials
+      run: |
+        rm -f ~/.aws/credentials
+        echo '[default]' >> ~/.aws/credentials
+        echo "aws_access_key_id=$access_key_id" >> ~/.aws/credentials
+        echo "aws_secret_access_key=$secret_access_key" >> ~/.aws/credentials
+        echo "aws_session_token=$token" >> ~/.aws/credentials
+
+    - name: Build with maven
+      run: mvn clean package
+
+    - name: project start
+      run: java -jar ./target/photogram-start-0.0.1-SNAPSHOT.war

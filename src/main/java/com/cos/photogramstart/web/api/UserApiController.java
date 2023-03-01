@@ -28,6 +28,8 @@ import lombok.RequiredArgsConstructor;
 
 // ajax 로 요청하면 응답을 파일을 리턴하는게 아니라 데이터를 응답해줘야함.  
 // 데이터를 응답해주는게 api  // api는 전부 RestController
+
+
 @RequiredArgsConstructor
 @RestController
 public class UserApiController {

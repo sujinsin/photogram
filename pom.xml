@@ -147,6 +147,20 @@
 			<artifactId>mariadb-java-client</artifactId>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui -->
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
 		<!-- s3 의존성 추가 -->
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-aws -->
@@ -159,12 +173,13 @@
 
 
 
+
 		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3 -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.amazonaws</groupId> -->
-<!-- 			<artifactId>aws-java-sdk-s3</artifactId> -->
-<!-- 			<version>1.12.408</version> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.amazonaws</groupId> -->
+		<!-- <artifactId>aws-java-sdk-s3</artifactId> -->
+		<!-- <version>1.12.408</version> -->
+		<!-- </dependency> -->
 
 
 

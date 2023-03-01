@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class UserService {
 	
-	private final S3Service s3Service;
+//	private final S3Service s3Service;
 	private final UserRepository userRepository;
 	private final SubscribeRepository subscribeRepository;
 	private final BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -75,37 +75,38 @@ public class UserService {
 		return userEntity;
 	}
 
-//	@Value("${file.path}")
-//	private String uploadFolder;
+	@Value("${file.path}")
+	private String uploadFolder;
 	
 	@Transactional
 	public User 회원프로필사진변경(int principalId, MultipartFile profileImageFile) {
 		
 
 		
-		//UUID uuid = UUID.randomUUID();
-		//String imageFileName  = uuid + "_" + profileImageFile.getOriginalFilename();
+		UUID uuid = UUID.randomUUID();
+		String imageFileName  = uuid + "_" + profileImageFile.getOriginalFilename();
 		
-		//Path imageFilePath  = Paths.get("file:///" + uploadFolder+imageFileName);
+		Path imageFilePath  = Paths.get("file:///" + uploadFolder+imageFileName);
 
 		User userEntity = userRepository.findById(principalId).orElseThrow(()-> {
 			throw new CustomApiException("프로필변경 실패 : 해당 회원이 없습니다. "); 
 		});
 				
-//		try {
-
-			//Files.write(imageFilePath, profileImageFile.getBytes());
-//		}catch (Exception e) {
-	//		e.getStackTrace();
-	//	}
-		
-		String imgPath = null;
 		try {
-			imgPath = s3Service.upload(profileImageFile, "user" + principalId);
-			userEntity.setProfileImageUrl(imgPath);			
-		} catch (IOException e) {
-			e.printStackTrace();
+
+			Files.write(imageFilePath, profileImageFile.getBytes());
+			userEntity.setProfileImageUrl(imageFileName);	
+		}catch (Exception e) {
+			e.getStackTrace();
 		}
+		
+//		String imgPath = null;
+//		try {
+//			imgPath = s3Service.upload(profileImageFile, "user" + principalId);
+//			userEntity.setProfileImageUrl(imgPath);			
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 
 		return userEntity;
 	} 

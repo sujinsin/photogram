@@ -198,7 +198,15 @@ file:
 
 # 배포
 
-	이 프로젝트는 AWS EC2와 Github Actions 자동배포를 사용하여 배포하였습니다.
+
+	이 프로젝트는 AWS EC2 서버를 사용해 배포하였고, 
+	디비 관리는 RDS, 
+	이미지 관리는 S3 를 사용합니다. 
+	application은 개발용, 배포용을 따로 설정해 관리하며 git에는 올리지 않았습니다. 
+	prod 배포용 yml에는 accessKey, Open Api 등의 비밀번호 등이 설정 되어있으며 
+	application-pro.yml 에도 중요한 비밀번호들은 ${} 플레이스 홀더로 등록해 비밀번호 노출을 최소화했고,
+	parameter store의 환경변수를 자동으로 가져와 치환해 사용할 수 있도록 환경셋팅을 하였습니다.
+	
 	
 <br>
 

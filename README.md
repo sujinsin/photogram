@@ -96,100 +96,121 @@
 ```
 <br>
 
-# YML 설정
+# 공통 YML 설정
 
 ```yml
-
+#공통요소들
 server:
-  port: 8082
   servlet:
     context-path: /
     encoding:
       charset: utf-8
       enabled: true
-    
+
 spring:
   mvc:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
       
-  datasource:
-    driver-class-name: ${ MARIADB_DRIVER_CLASS_NAME }
-    url: ${ MARIADB_URL }
-    username: ${ MARIADB_USERNAME }
-    password: ${ MARIADB_PASSWORD }
+  profiles:
+    active: dev
 
   jpa:
+    database-platform: org.hibernate.dialect.MariaDBDialect
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      ddl-auto: update
       use-new-id-generator-mappings: false
     open-in-view: true
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-        
+
   servlet:
     multipart:
       enabled: true
       max-file-size: 2MB
 
+springfox:
+  documentation:
+    swagger:
+      use-model-v3: false
+
+
+```
+
+
+
+<br>
+# 배포용 YML 설정
+
+```prod.yml
+
+server:
+  port: 8080
+
+spring:
+
+  datasource:
+    url: ${/config/application_production/mariadb.url}
+    username: ${/config/application_production/mariadb.username}
+    password: ${/config/application_production/mariadb.password}
+    driver-class-name: org.mariadb.jdbc.Driver
+
   security:
-    user:
-      name: ${ SECURITY_NAME }
-      password: ${ SECURITY_PASSWORD }
 
     oauth2:
       client:
         registration:
           google:
-            client-id: ${ GOOGLE_CLIENT_ID }
-            client-secret: ${ GOOGLE_CLIENT_SECRET }
+            client-id: ${/config/application_production/google.cliend.id}
+            client-secret: ${/config/application_production/google.cliend.secret}
             scope:
-              - email
-              - profile
-          facebook:
-            client-id: ${ FACEBOOK_CLIENT_ID }
-            client-secret: ${ FACEBOOK_CLIENT_SECRET }
-            scope: 
-            - public_profile
-            - email        
+            - email
+            - profile
           kakao:
-            client-id: ${ KAKAO_CLIENT_ID }
-            redirect-uri: ${ KAKAO_REDIRECT_URI }
+            client-id: ${/config/application_production/kakao.cliend.id}
+            redirect-uri: ${/config/application_production/kakao.redirect.uri}
             client-authentication-method: POST
             authorization-grant-type: authorization_code
-            scope: 
+            scope:
             - profile_nickname
             - profile_image
             - account_email
             - gender
             client-name: Kakao
           naver:
-            client-id: ${ NAVER_CLIENT_ID }
-            client-secret: ${ NAVER_CLIENT_SECRET }
-            redirect-uri: ${ NAVER_REDIRECT_URI }
+            client-id: ${/config/application_production/naver.cliend.id}
+            client-secret: ${/config/application_production/naver.cliend.secret}
+            redirect-uri: ${/config/application_production/naver.redirect.uri}
             client-authentication-method: POST
-            authorization-grant-type: authorization_code      
+            authorization-grant-type: authorization_code
             scope: name,email
             client-name: Naver
         provider:
           kakao:
-            authorization-uri: ${ KAKAO_AUTHORIZATION_URI }
-            token-uri: ${ KAKAO_TOKEN_URI }
-            user-info-uri: ${ KAKAO_USER_INFO_URI }
-            user-name-attribute: id      
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
           naver:
-            authorization-uri: ${ NAVER_AUTHORIZATION_URI }
-            token-uri: ${ NAVER_TOKEN_URI }
-            user-info-uri: ${ NAVER_USER_INFO_URI }
+            authorization-uri: https://nid.naver.com/oauth2.0/authorize
+            token-uri: https://nid.naver.com/oauth2.0/token
+            user-info-uri: https://openapi.naver.com/v1/nid/me
             user-name-attribute: response
+            
+            
+awsParameterStorePropertySource:
+  enabled: true
+                   
+cloud:
+  aws:
+    credentials:
+      accessKey: ${/config/application_production/cloud.aws.credentials.accessKey}
+      secretKey: ${/config/application_production/cloud.aws.credentials.secretKey}
+    s3:
+      bucket: ${/config/application_production/cloud.aws.credentials.bucket}
+    region:
+      static: ${/config/application_production/cloud.aws.credentials.region}
 
-file:
-  path: ${ FILE_PATH }
 
 
 ```

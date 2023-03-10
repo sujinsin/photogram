@@ -79,10 +79,7 @@ public class UserServiceTest {
 		@Test
 		@DisplayName("페이지 사용자가 존재할 경우 리스트를 리턴해준다.")
 		void return_list_when_pageUserId_exist() {
-			
-			int pageUserId = 2;
-			int principalId = 1;
-			
+
 			List<Image> images = new ArrayList<>();
 			Image image1 = new Image();
 			image1.setLikes(Arrays.asList(new Likes(), new Likes()));

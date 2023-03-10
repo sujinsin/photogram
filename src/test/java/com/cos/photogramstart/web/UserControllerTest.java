@@ -70,4 +70,32 @@ public class UserControllerTest {
 		// 반환된 viewName 검증
 		assertEquals("/user/profile", viewName);
 	}
+	
+	// 회원정보페이지에 접근 성공시 
+	@Test
+	public void updatePage_succes() {
+		
+		// 클라이언트의 id 
+		int id = 3;
+		
+		// 서버에서 확인을 위해 클라이언트 로그인 객체에서 직접 id 값을 뽑아옴
+		int principalDetailsId = 3;
+		
+
+		if(principalDetails != null) {
+		    // principalDetails가 null이 아닐 때, given()을 사용하여 principalDetails에서 user를 가져온다.
+		    given(principalDetails.getUser()).willReturn(user);
+		} 
+
+		
+		// given() 을 사용하여 principalDetails 의 user의 id를 가져온다. 
+		given(principalDetails.getUser().getId()).willReturn(principalDetailsId);
+		
+		// userController.updatePage() 의 반환값을 viewName 에 담아준다.
+		String viewName = userController.updatePage(id, principalDetails);
+		
+		// viewName 에 받아온 반환값이 if절의  user/update 값이면 테스트 성공 
+		assertEquals("user/update", viewName);
+
+	}
 }

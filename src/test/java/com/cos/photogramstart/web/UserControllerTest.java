@@ -8,12 +8,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ui.Model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.ArgumentMatchers.eq;
 
 import com.cos.photogramstart.config.auth.PrincipalDetails;
 import com.cos.photogramstart.domain.user.User;
+import com.cos.photogramstart.handler.ex.CustomException;
 import com.cos.photogramstart.service.UserService;
 import com.cos.photogramstart.web.dto.user.UserProfileDto;
 
@@ -97,5 +99,30 @@ public class UserControllerTest {
 		// viewName 에 받아온 반환값이 if절의  user/update 값이면 테스트 성공 
 		assertEquals("user/update", viewName);
 
+	}
+	
+	// 회원정보페이지에 접근 실패시
+	@Test
+	public void updatePage_fail() {
+		
+		// 클라이언트의 로그인 id 
+		int id = 1;
+		
+		// 서버에서 확인을 위해 클라이언트 로그인 객체에서 직접 id 값을 뽑아옴
+		int principalDetailsId = 3;		
+		
+		if(principalDetails != null) {
+			// principalDetails 가 null이 아닐 때, given()을 사용하여 principalDetails에서 user를 가져온다.
+		    given(principalDetails.getUser()).willReturn(user);
+		}
+		
+		// given() 을 사용하여 principalDetails 의 user의 id를 가져온다. 
+		given(principalDetails.getUser().getId()).willReturn(principalDetailsId);
+
+	    // assertThrows() :  특정 예외가 발생하는지 확인하는 메서드
+	    // 두개의 매개변수 :  1. 발생할 예외, 2. 예외 발생할 코드를 포함하는 람다식
+		// userController.updatePage() 메서드를 호출할 때 CustomException 예외가 발생해야만 테스트가 성공한다.
+	    assertThrows(CustomException.class, () -> userController.updatePage(id, principalDetails));
+	    
 	}
 }

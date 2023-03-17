@@ -9,4 +9,8 @@ public class Script {
 		sb.append("</script>");
 		return sb.toString();
 	}
+
+	public static String backAjax(String msg) {
+		return msg ;
+	}
 }

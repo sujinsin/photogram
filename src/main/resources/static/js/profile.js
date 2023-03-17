@@ -123,7 +123,8 @@ function profileImageUpload(pageUserId, principalId) {
 			}
 			reader.readAsDataURL(f);		
 		}).fail(error =>{
-			console.log("오류",error);
+			console.log("오류",error.responseText);
+			alert(error.responseText);
 		});
 	});
 }

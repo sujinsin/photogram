@@ -1,5 +1,7 @@
 package com.cos.photogramstart.handler;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import com.cos.photogramstart.handler.ex.CustomApiException;
 import com.cos.photogramstart.handler.ex.CustomException;
@@ -34,6 +37,19 @@ public class ControllerExceptionHandler {
 			return Script.back(e.getErrorMap().toString().replaceAll("[{}]","")); 			
 		}
 	}
+	
+	// 4mb 용량이 넘을때 발생하는 에러 
+	@ExceptionHandler(value = {MaxUploadSizeExceededException.class})
+	public String fileException(Exception e, HttpServletRequest request) {
+		
+			// ajax 에서 넘어온 요청일경우  
+			if("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+				return Script.backAjax("파일 용량이 범위값을 초과합니다. 4MB 이하 이미지만 업로드 해주세요");
+			}else { // form 데이터로 넘어오는 경우
+				return Script.back("파일 용량이 범위값을 초과합니다. 4MB 이하 이미지만 업로드 해주세요");
+			}
+	}
+	
 	
 	// 데이터를 리턴함.  ajax 할때는 데이터를 리턴해야함. 
 	@ExceptionHandler(CustomValidationApiException.class)

@@ -1,21 +1,8 @@
 package com.cos.photogramstart.service;
 
-<<<<<<< HEAD
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-=======
-import java.io.IOException;
->>>>>>> features/rimitImage
 import java.util.List;
 
-<<<<<<< HEAD
-import org.apache.commons.io.FileUtils;
-import org.springframework.beans.factory.annotation.Value;
-=======
->>>>>>> features/rimitImage
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -24,11 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cos.photogramstart.config.auth.PrincipalDetails;
 import com.cos.photogramstart.domain.image.Image;
 import com.cos.photogramstart.domain.image.ImageRepository;
-<<<<<<< HEAD
-import com.cos.photogramstart.domain.likes.LikesRepository;
-import com.cos.photogramstart.util.ImageUtil;
-=======
->>>>>>> features/rimitImage
 import com.cos.photogramstart.web.dto.image.ImageUploadDto;
 
 import lombok.RequiredArgsConstructor;
@@ -63,31 +45,7 @@ public class ImageService {
 
 	@Transactional 
 	public void 사진업로드(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) {
-<<<<<<< HEAD
-		byte[] resizedImageBytes = null;
-		try {
-			
 
-			byte[] bytes = imageUploadDto.getFile().getBytes();
-			File file = new File(imageUploadDto.getFile().getOriginalFilename());
-			FileUtils.writeByteArrayToFile(file, bytes);
-	    	
-			resizedImageBytes  = ImageUtil.resize(file);	
-	    	System.out.println(" image service resizedImageBytes :  " + resizedImageBytes);
-	    	
-			UUID uuid =UUID.randomUUID();	
-			String imageFileName = uuid + "_" +imageUploadDto.getFile().getOriginalFilename(); 
-		
-			Path imageFilePath = Paths.get(uploadFolder + imageFileName);
-			
-			Files.write(imageFilePath,resizedImageBytes);
-			Image image = imageUploadDto.toEntity(imageFileName, principalDetails.getUser());
-			imageRepository.save(image);	
-			
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-=======
 
 
 		String imgPath = null;
@@ -99,8 +57,6 @@ public class ImageService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
->>>>>>> features/rimitImage
 	}
 
 	@Transactional

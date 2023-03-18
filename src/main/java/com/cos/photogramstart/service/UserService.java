@@ -1,13 +1,7 @@
 package com.cos.photogramstart.service;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.UUID;
+import java.io.IOException;
 
-import org.apache.commons.io.FileUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +13,6 @@ import com.cos.photogramstart.domain.user.UserRepository;
 import com.cos.photogramstart.handler.ex.CustomApiException;
 import com.cos.photogramstart.handler.ex.CustomException;
 import com.cos.photogramstart.handler.ex.CustomValidationApiException;
-import com.cos.photogramstart.util.ImageUtil;
 import com.cos.photogramstart.web.dto.user.UserProfileDto;
 
 import lombok.RequiredArgsConstructor;
@@ -28,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class UserService {
 	
-//	private final S3Service s3Service;
+	private final S3Service s3Service;
 	private final UserRepository userRepository;
 	private final SubscribeRepository subscribeRepository;
 	private final BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -77,35 +70,22 @@ public class UserService {
 		return userEntity;
 	}
 
-	@Value("${file.path}")
-	private String uploadFolder;
-	
 	@Transactional
 	public User 회원프로필사진변경(int principalId, MultipartFile profileImageFile) {
+		
+
 		
 		User userEntity = userRepository.findById(principalId).orElseThrow(()-> {
 			throw new CustomApiException("프로필변경 실패 : 해당 회원이 없습니다. "); 
 		});
 				
+
+		String imgPath = null;
 		try {
-
-			byte[] bytes = profileImageFile.getBytes();
-			File file = new File(profileImageFile.getOriginalFilename());
-			FileUtils.writeByteArrayToFile(file, bytes);
-			
-			byte[] resizedImageBytes  = ImageUtil.resize(file);	
-	    	System.out.println(" image service resizedImageBytes :  " + resizedImageBytes);
-			
-			UUID uuid = UUID.randomUUID();
-			String imageFileName  = uuid + "_" + profileImageFile.getOriginalFilename();
-			
-			Path imageFilePath  = Paths.get("file:///" + uploadFolder+imageFileName);
-
-			
-			Files.write(imageFilePath, resizedImageBytes);
-			userEntity.setProfileImageUrl(imageFileName);	
-		}catch (Exception e) {
-			e.getStackTrace();
+			imgPath = s3Service.upload(profileImageFile, "user" + principalId);
+			userEntity.setProfileImageUrl(imgPath);			
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 		return userEntity;

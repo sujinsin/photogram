@@ -1,11 +1,14 @@
 package com.cos.photogramstart.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +19,7 @@ import com.cos.photogramstart.config.auth.PrincipalDetails;
 import com.cos.photogramstart.domain.image.Image;
 import com.cos.photogramstart.domain.image.ImageRepository;
 import com.cos.photogramstart.domain.likes.LikesRepository;
+import com.cos.photogramstart.util.ImageUtil;
 import com.cos.photogramstart.web.dto.image.ImageUploadDto;
 
 import lombok.RequiredArgsConstructor;
@@ -53,31 +57,29 @@ public class ImageService {
 	
 	@Transactional 
 	public void 사진업로드(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) {
-
-		UUID uuid =UUID.randomUUID();
-		
-		String imageFileName = uuid + "_" +imageUploadDto.getFile().getOriginalFilename(); 
-	
-		Path imageFilePath = Paths.get("file:///" + uploadFolder + imageFileName);
-		
+		byte[] resizedImageBytes = null;
 		try {
-			Files.write(imageFilePath,imageUploadDto.getFile().getBytes());
+			
+
+			byte[] bytes = imageUploadDto.getFile().getBytes();
+			File file = new File(imageUploadDto.getFile().getOriginalFilename());
+			FileUtils.writeByteArrayToFile(file, bytes);
+	    	
+			resizedImageBytes  = ImageUtil.resize(file);	
+	    	System.out.println(" image service resizedImageBytes :  " + resizedImageBytes);
+	    	
+			UUID uuid =UUID.randomUUID();	
+			String imageFileName = uuid + "_" +imageUploadDto.getFile().getOriginalFilename(); 
+		
+			Path imageFilePath = Paths.get(uploadFolder + imageFileName);
+			
+			Files.write(imageFilePath,resizedImageBytes);
 			Image image = imageUploadDto.toEntity(imageFileName, principalDetails.getUser());
 			imageRepository.save(image);	
-		} catch (Exception e) {
-			e.printStackTrace();
+			
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
-
-//		String imgPath = null;
-//		try {
-//			imgPath = s3Service.upload(imageUploadDto.getFile(), "user" + principalDetails.getUser().getId());
-//			//userEntity.setProfileImageUrl(imgPath);
-//			Image image = imageUploadDto.toEntity(imgPath, principalDetails.getUser());
-//			imageRepository.save(image);		
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		
 	}
 
 	@Transactional

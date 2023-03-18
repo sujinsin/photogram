@@ -14,6 +14,7 @@ import com.cos.photogramstart.domain.user.UserRepository;
 import com.cos.photogramstart.handler.ex.CustomApiException;
 import com.cos.photogramstart.handler.ex.CustomException;
 import com.cos.photogramstart.handler.ex.CustomValidationApiException;
+import com.cos.photogramstart.util.ImageUtil;
 import com.cos.photogramstart.web.dto.user.UserProfileDto;
 
 import lombok.RequiredArgsConstructor;

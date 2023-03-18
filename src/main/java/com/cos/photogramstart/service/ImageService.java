@@ -46,11 +46,8 @@ public class ImageService {
 	@Transactional 
 	public void 사진업로드(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) {
 
-
-
-		String imgPath = null;
 		try {
-			imgPath = s3Service.upload(imageUploadDto.getFile(), "user" + principalDetails.getUser().getId());
+			String imgPath = s3Service.upload(imageUploadDto.getFile(), "user" + principalDetails.getUser().getId());
 			//userEntity.setProfileImageUrl(imgPath);
 			Image image = imageUploadDto.toEntity(imgPath, principalDetails.getUser());
 			imageRepository.save(image);		

@@ -1,6 +1,8 @@
 package com.cos.photogramstart.service;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.UUID;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +17,9 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.cos.photogramstart.util.ImageUtil;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -52,9 +56,22 @@ public class S3Service {
     }
 
     public String upload(MultipartFile file, String userId) throws IOException {
+    	
+
+    	byte[] bytes = file.getBytes();    	
         String fileName = file.getOriginalFilename();
+    	
+    	byte[] resizedImageBytes  = ImageUtil.resize(bytes, fileName);	
         UUID uuid = UUID.randomUUID();
-        s3Client.putObject(new PutObjectRequest(bucket, fileDir + userId + "/" + uuid + fileName, file.getInputStream(), null)
+        
+        InputStream stream = new ByteArrayInputStream(resizedImageBytes);
+        
+        ObjectMetadata metadata = new ObjectMetadata();
+        metadata.setContentLength(resizedImageBytes.length);
+        metadata.setContentType(file.getContentType());
+        
+        
+        s3Client.putObject(new PutObjectRequest(bucket, fileDir + userId + "/" + uuid + fileName, stream, metadata)
                 .withCannedAcl(CannedAccessControlList.PublicRead));
         String uuidex = uuid.toString();
         System.out.println(fileDir + " 파일네임 못가져오는듯? ");

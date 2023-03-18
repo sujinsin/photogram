@@ -1,5 +1,6 @@
 package com.cos.photogramstart.service;
 
+<<<<<<< HEAD
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,6 +9,10 @@ import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
+=======
+import java.io.IOException;
+
+>>>>>>> features/rimitImage
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +33,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class UserService {
 	
-//	private final S3Service s3Service;
+	private final S3Service s3Service;
 	private final UserRepository userRepository;
 	private final SubscribeRepository subscribeRepository;
 	private final BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -77,18 +82,20 @@ public class UserService {
 		return userEntity;
 	}
 
-	@Value("${file.path}")
-	private String uploadFolder;
-	
 	@Transactional
 	public User 회원프로필사진변경(int principalId, MultipartFile profileImageFile) {
 		
+<<<<<<< HEAD
+=======
+
+		
+>>>>>>> features/rimitImage
 		User userEntity = userRepository.findById(principalId).orElseThrow(()-> {
 			throw new CustomApiException("프로필변경 실패 : 해당 회원이 없습니다. "); 
 		});
 				
-		try {
 
+<<<<<<< HEAD
 			byte[] bytes = profileImageFile.getBytes();
 			File file = new File(profileImageFile.getOriginalFilename());
 			FileUtils.writeByteArrayToFile(file, bytes);
@@ -106,6 +113,14 @@ public class UserService {
 			userEntity.setProfileImageUrl(imageFileName);	
 		}catch (Exception e) {
 			e.getStackTrace();
+=======
+		String imgPath = null;
+		try {
+			imgPath = s3Service.upload(profileImageFile, "user" + principalId);
+			userEntity.setProfileImageUrl(imgPath);			
+		} catch (IOException e) {
+			e.printStackTrace();
+>>>>>>> features/rimitImage
 		}
 
 		return userEntity;

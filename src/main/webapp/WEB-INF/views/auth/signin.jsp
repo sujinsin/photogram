@@ -61,12 +61,6 @@
 						</div>
 						<div class="login__facebook">
 							<button
-								onclick="javascript:location.href='/oauth2/authorization/facebook'">
-								<i class="fab fa-facebook-f"></i> <span>Facebook으로 로그인</span>
-							</button>
-						</div>
-						<div class="login__facebook">
-							<button
 								onclick="javascript:location.href='/oauth2/authorization/kakao'">
 								  <i class="fas fa-comments"></i><span>&nbsp;Kakaotalk으로
 									로그인</span>

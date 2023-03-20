@@ -114,7 +114,7 @@ spring:
       suffix: .jsp
       
   profiles:
-    active: dev
+    active: prod
 
   jpa:
     database-platform: org.hibernate.dialect.MariaDBDialect
@@ -150,9 +150,9 @@ server:
 spring:
 
   datasource:
-    url: ${/config/application_production/mariadb.url}
-    username: ${/config/application_production/mariadb.username}
-    password: ${/config/application_production/mariadb.password}
+    url: ${/config/photogram/mariadb.url}
+    username: ${/config/photogram/mariadb.username}
+    password: ${/config/photogram/mariadb.password}
     driver-class-name: org.mariadb.jdbc.Driver
 
   security:
@@ -161,14 +161,14 @@ spring:
       client:
         registration:
           google:
-            client-id: ${/config/application_production/google.cliend.id}
-            client-secret: ${/config/application_production/google.cliend.secret}
+            client-id: ${/config/photogram/google.cliend.id}
+            client-secret: ${/config/photogram/google.cliend.secret}
             scope:
             - email
             - profile
           kakao:
-            client-id: ${/config/application_production/kakao.cliend.id}
-            redirect-uri: ${/config/application_production/kakao.redirect.uri}
+            client-id: ${/config/photogram/kakao.cliend.id}
+            redirect-uri: ${/config/photogram/kakao.redirect.uri}
             client-authentication-method: POST
             authorization-grant-type: authorization_code
             scope:
@@ -178,9 +178,9 @@ spring:
             - gender
             client-name: Kakao
           naver:
-            client-id: ${/config/application_production/naver.cliend.id}
-            client-secret: ${/config/application_production/naver.cliend.secret}
-            redirect-uri: ${/config/application_production/naver.redirect.uri}
+            client-id: ${/config/photogram/naver.cliend.id}
+            client-secret: ${/config/photogram/naver.cliend.secret}
+            redirect-uri: ${/config/photogram/naver.redirect.uri}
             client-authentication-method: POST
             authorization-grant-type: authorization_code
             scope: name,email
@@ -204,12 +204,12 @@ awsParameterStorePropertySource:
 cloud:
   aws:
     credentials:
-      accessKey: ${/config/application_production/cloud.aws.credentials.accessKey}
-      secretKey: ${/config/application_production/cloud.aws.credentials.secretKey}
+      accessKey: ${/config/photogram/cloud.aws.credentials.accessKey}
+      secretKey: ${/config/photogram/cloud.aws.credentials.secretKey}
     s3:
-      bucket: ${/config/application_production/cloud.aws.credentials.bucket}
+      bucket: ${/config/photogram/cloud.aws.credentials.bucket}
     region:
-      static: ${/config/application_production/cloud.aws.credentials.region}
+      static: ${/config/photogram/cloud.aws.credentials.region}
 
 
 
@@ -226,7 +226,9 @@ cloud:
 	application은 개발용, 배포용을 따로 설정해 관리하며 git에는 올리지 않았습니다. 
 	prod 배포용 yml에는 accessKey, Open Api 등의 비밀번호 등이 설정 되어있으며 
 	application-pro.yml 에도 중요한 비밀번호들은 ${} 플레이스 홀더로 등록해 비밀번호 노출을 최소화했고,
-	parameter store의 환경변수를 자동으로 가져와 치환해 사용할 수 있도록 환경셋팅을 하였습니다.
+	parameter store의 환경변수를 자동으로 가져와 치환해 사용할 수 있도록 환경셋팅을 하였습니다. 
+	카페24에서 DNS를 구매하여 URL을 직관적으로 구현하였으며, Cloudflare를 이용하여 SSL/TLS 인증서를 발급하고 
+	HTTPS 통신을 구현하여 웹 사이트의 보안성을 높였습니다. 이를 통해 안전하고 안정적인 서버 URL을 사용할 수 있게 구현하였습니다. 
 	
 	
 <br>
@@ -237,7 +239,7 @@ cloud:
 
 - 로그인 기능
 
-	- Spring Security와 OAuth2를 사용하여 로그인 기능을 구현하였습니다. 
+	- Spring Security와 OAuth2를 사용하여 로그인 기능을 구현하였습니다. (google, kakao, naver)
 	
 	- 사용자는 OAuth2 Provider를 통해 최초로그인시 자동으로 디비에 데이터를 저장하고, 
 	
@@ -264,5 +266,11 @@ cloud:
 - 인기페이지 
 
 	- 좋아요를 많이 받은 게시물 순으로 이미지를 보여주는 게시판을 구현하였습니다.
+
+- 자잘하게 구현해본 기능
+	- 10mb 이하의 이미지만 업로드 가능 하며 2mb 이상 이미지의 경우 리사이징 하여 2mb 이하로 사이즈 조정 
+	- 메인페이지(집모양아이콘) 의 이미지 더블클릭 시 좋아요 가능, 하트 in-out 모션 기능 
+	- api 명세서 swagger 사용
+	
 	
 <br><br>

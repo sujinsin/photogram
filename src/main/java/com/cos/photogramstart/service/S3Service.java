@@ -2,7 +2,6 @@ package com.cos.photogramstart.service;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.UUID;
 
 import javax.annotation.PostConstruct;
@@ -17,7 +16,6 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.cos.photogramstart.util.ImageUtil;
 
@@ -56,28 +54,19 @@ public class S3Service {
     }
 
     public String upload(MultipartFile file, String userId) throws IOException {
-    	
-
-    	byte[] bytes = file.getBytes();    	
+        byte[] bytes = file.getBytes();
         String fileName = file.getOriginalFilename();
-    	
-    	byte[] resizedImageBytes  = ImageUtil.resize(bytes, fileName);	
+        
+        byte[] resizedImageBytes = ImageUtil.resize(bytes, fileName); // 이미지 리사이징
+        
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(resizedImageBytes);
+        
         UUID uuid = UUID.randomUUID();
         
-        InputStream stream = new ByteArrayInputStream(resizedImageBytes);
-        
-        ObjectMetadata metadata = new ObjectMetadata();
-        metadata.setContentLength(resizedImageBytes.length);
-        metadata.setContentType(file.getContentType());
-        
-        
-        s3Client.putObject(new PutObjectRequest(bucket, fileDir + userId + "/" + uuid + fileName, stream, metadata)
+        s3Client.putObject(new PutObjectRequest(bucket, fileDir + userId + "/" + uuid + fileName, inputStream, null)
                 .withCannedAcl(CannedAccessControlList.PublicRead));
+        
         String uuidex = uuid.toString();
-        System.out.println(fileDir + " 파일네임 못가져오는듯? ");
-//        System.out.println(s3Client.getUrl(bucket+"test/",  uuidex + fileName).toString() + " : 이미지 이름 어떻게해? ");
-//        System.out.println(s3Client.getBucketLocation(bucket) + " 테스트 location 1");
-//        System.out.println(s3Client.getObject(bucket, uuidex + fileName) + "테스트 object get ");
         return s3Client.getUrl(bucket, fileDir  + userId + "/" + uuidex + fileName).toString();
     }
 }

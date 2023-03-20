@@ -114,7 +114,7 @@ spring:
       suffix: .jsp
       
   profiles:
-    active: dev
+    active: prod
 
   jpa:
     database-platform: org.hibernate.dialect.MariaDBDialect
@@ -150,9 +150,9 @@ server:
 spring:
 
   datasource:
-    url: ${/config/application_production/mariadb.url}
-    username: ${/config/application_production/mariadb.username}
-    password: ${/config/application_production/mariadb.password}
+    url: ${/config/photogram/mariadb.url}
+    username: ${/config/photogram/mariadb.username}
+    password: ${/config/photogram/mariadb.password}
     driver-class-name: org.mariadb.jdbc.Driver
 
   security:
@@ -161,14 +161,14 @@ spring:
       client:
         registration:
           google:
-            client-id: ${/config/application_production/google.cliend.id}
-            client-secret: ${/config/application_production/google.cliend.secret}
+            client-id: ${/config/photogram/google.cliend.id}
+            client-secret: ${/config/photogram/google.cliend.secret}
             scope:
             - email
             - profile
           kakao:
-            client-id: ${/config/application_production/kakao.cliend.id}
-            redirect-uri: ${/config/application_production/kakao.redirect.uri}
+            client-id: ${/config/photogram/kakao.cliend.id}
+            redirect-uri: ${/config/photogram/kakao.redirect.uri}
             client-authentication-method: POST
             authorization-grant-type: authorization_code
             scope:
@@ -178,9 +178,9 @@ spring:
             - gender
             client-name: Kakao
           naver:
-            client-id: ${/config/application_production/naver.cliend.id}
-            client-secret: ${/config/application_production/naver.cliend.secret}
-            redirect-uri: ${/config/application_production/naver.redirect.uri}
+            client-id: ${/config/photogram/naver.cliend.id}
+            client-secret: ${/config/photogram/naver.cliend.secret}
+            redirect-uri: ${/config/photogram/naver.redirect.uri}
             client-authentication-method: POST
             authorization-grant-type: authorization_code
             scope: name,email
@@ -204,12 +204,12 @@ awsParameterStorePropertySource:
 cloud:
   aws:
     credentials:
-      accessKey: ${/config/application_production/cloud.aws.credentials.accessKey}
-      secretKey: ${/config/application_production/cloud.aws.credentials.secretKey}
+      accessKey: ${/config/photogram/cloud.aws.credentials.accessKey}
+      secretKey: ${/config/photogram/cloud.aws.credentials.secretKey}
     s3:
-      bucket: ${/config/application_production/cloud.aws.credentials.bucket}
+      bucket: ${/config/photogram/cloud.aws.credentials.bucket}
     region:
-      static: ${/config/application_production/cloud.aws.credentials.region}
+      static: ${/config/photogram/cloud.aws.credentials.region}
 
 
 

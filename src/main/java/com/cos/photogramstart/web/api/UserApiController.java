@@ -43,6 +43,7 @@ public class UserApiController {
 
 	private final SubscribeService subscribeService;
 
+	// 회원 프로필 사진변경 
 	@Operation(description = "유저의 대표 프로필 사진을 등록합니다.")
 	@ApiResponses({
 		@ApiResponse(code = 200, message = "프로필 등록 성공", response = CMRespDto.class),
@@ -62,6 +63,7 @@ public class UserApiController {
 		return new ResponseEntity<>(new CMRespDto<>(1, "프로필사진변경 성공", null), HttpStatus.OK);
 	}
 
+	// 구독자 정보 가져오기 
 	@GetMapping("/api/user/{pageUserId}/subscribe")
 	public ResponseEntity<?> subscribeList(@PathVariable int pageUserId,
 			@AuthenticationPrincipal PrincipalDetails principalDetails) {
@@ -69,6 +71,7 @@ public class UserApiController {
 		return new ResponseEntity<>(new CMRespDto<>(1, "구독자 정보 리스트 가져오기 성공", subscribeDto), HttpStatus.OK);
 	}
 
+	// 회원정보 수정 정보 전송 
 	@PutMapping("/api/user/{id}")
 	public CMRespDto<?> update(@PathVariable int id, @Valid UserUpdateDto userUpdateDto, BindingResult bindingResult,
 			@AuthenticationPrincipal PrincipalDetails principalDetails) {

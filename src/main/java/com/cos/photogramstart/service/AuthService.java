@@ -16,21 +16,23 @@ public class AuthService {
 
 	private final UserRepository userRepository;
 	
+	// 스프링 시큐리티 로그인을 위한 비밀번호 암호화 
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Transactional
 	public User 회원가입(User user) {
 
+		// rawPassword 평문비밀번호 , encPassword 암호화한 비밀번호 
 		String rawPassword = user.getPassword();
 		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
+		
+		// 다시 User 객체에 삽입
 		user.setPassword(encPassword); 
-		
-		System.out.println("권한 서비스단에서 뭘 뽑아서 주는거야? " +  user.getRole());
-
 		user.setRole(RoleType.USER); 
-		System.out.println("권한 서비스단에서 뭘 뽑아서 주는거야? 넣고 나서  " +  user.getRole());
 		
+		// jpa 기본 crud save를 사용해 디비에 insert 
 		User userEntity = userRepository.save(user); 
+		
 		return userEntity;
 		
 	}

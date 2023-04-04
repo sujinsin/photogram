@@ -24,6 +24,7 @@ public class ImageService {
 
 //	private final LikesRepository likesRepository;
 
+	// 좋아요 상태가 계속 바뀌기 때문에 select 할때 마다 좋아요 정보를 담아줌
 	@Transactional(readOnly = true)
 	public Page<Image> 이미지스토리(int principalId, Pageable pageable) {
 		Page<Image> images = imageRepository.mStory(principalId, pageable);
@@ -31,8 +32,10 @@ public class ImageService {
 		// images 에 좋아요 상태를 담아야함. // 양방향 매핑으로 가지고 올 수 있게 필드 수정
 		images.forEach((image) -> {
 
+			// 좋아요 수 
 			image.setLikeCount(image.getLikes().size());
 
+			// 이미지의 좋아요에서 현재 로그인 사용자가 좋아요를 했는지 여부를 확인 후 했으면 상태 필드를 true 로 
 			image.getLikes().forEach((like) -> {
 				if (like.getUser().getId() == principalId) {
 					image.setLikeStatus(true);
@@ -42,6 +45,7 @@ public class ImageService {
 		return images;
 	}
 
+	// s3 에 사진 저장 
 	@Transactional
 	public void 사진업로드(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) {
 
@@ -55,6 +59,7 @@ public class ImageService {
 		}
 	}
 
+	
 	@Transactional
 	public List<Image> 인기사진() {
 

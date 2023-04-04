@@ -63,11 +63,13 @@ public class ControllerExceptionHandler {
 		return new ResponseEntity<>(new CMRespDto<>(-1,e.getMessage(),null), HttpStatus.BAD_REQUEST);
 	}
 	
+	
 	@ExceptionHandler(CustomException.class)
 	public String exception(CustomException e) {
 		return Script.back(e.getMessage());
 	}
 	
+	// 해당 유저가 존재하지 않을때 
 	@ExceptionHandler(UsernameNotFoundException.class)
 	public ResponseEntity<?> idNotFoundException(UsernameNotFoundException e) {
 		return new ResponseEntity<>(new CMRespDto<>(-1,e.getMessage(),null), HttpStatus.BAD_REQUEST);

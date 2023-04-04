@@ -28,6 +28,7 @@ public class ImageApiController {
 	
 	private final LikesService likesService;
 	
+	// 내가 구독한 사람들의 게시물 이미지 가져오기 (좋아요 정보도 같이 가져와야함 )
 	@GetMapping("/api/image")
 	public ResponseEntity<?> imageStory(@AuthenticationPrincipal PrincipalDetails principalDetails,
 			@PageableDefault(size=3) Pageable pageable ) {
@@ -37,6 +38,7 @@ public class ImageApiController {
 		return new ResponseEntity<>(new CMRespDto<>(1, "이미지를 가져왔어유 ", images), HttpStatus.OK);
 	}
 	
+	// 이미지 좋아요 저장 
 	@PostMapping("/api/image/{imageId}/likes")
 	public ResponseEntity<?> likes(@PathVariable int imageId, @AuthenticationPrincipal PrincipalDetails principalDetails){
 		
@@ -47,6 +49,7 @@ public class ImageApiController {
 		return new ResponseEntity<>(new CMRespDto<>(1, "좋아요성공", image.getLikeCount()), HttpStatus.CREATED);
 	}
 	
+	// 이미지 좋아요 취소 
 	@DeleteMapping("/api/image/{imageId}/likes")
 	public ResponseEntity<?> unlikes(@PathVariable int imageId, @AuthenticationPrincipal PrincipalDetails principalDetails){
 		

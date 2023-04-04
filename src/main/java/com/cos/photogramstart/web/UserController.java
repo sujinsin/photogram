@@ -20,6 +20,7 @@ public class UserController {
 
 	private final UserService userService;
 	
+	// 회원 프로필페이지로 이동 
 	@GetMapping("/user/{pageUserId}")
 	public String profile(@PathVariable int pageUserId, Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
@@ -29,6 +30,7 @@ public class UserController {
 		return "/user/profile";
 	}
 	
+	// 회원 정보 업데이트 페이지로 이동
 	@GetMapping("/user/{id}/update")
 	public String updatePage(@PathVariable int id	, @AuthenticationPrincipal PrincipalDetails principalDetails) {
 		

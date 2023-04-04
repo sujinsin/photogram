@@ -9,6 +9,7 @@ import com.cos.photogramstart.domain.user.User;
 
 import lombok.Data;
 
+// 업데이트에서 제외되는 필드들이 없는 dto를 생성 
 @Data
 public class UserUpdateDto {
 	
